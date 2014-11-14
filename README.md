@@ -4,6 +4,8 @@ Glimpse.ElasticSearch
 Description
 -----------
 
+[![Glimpse.ElasticSearch MyGet Build Status](https://www.myget.org/BuildSource/Badge/onuralp?identifier=2018baed-d23c-4199-bb89-3062fef1a468)](https://www.myget.org/)
+
 A simple Glimpse plugin for ElasticSearch. It shows queries and response times.
 
 Usage
