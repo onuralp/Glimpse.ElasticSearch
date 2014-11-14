@@ -25,7 +25,7 @@ Screenshot
 
 *(Feel free to pick something below.)*
 
-- [ ] Add nuspec file and push it to the nuget.
+- [x] Add nuspec file and push it to the nuget.
 - [ ] Add a sample project about how to use.
 - [ ] Write a blog post about this.
 
