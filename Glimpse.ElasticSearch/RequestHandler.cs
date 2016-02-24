@@ -33,6 +33,7 @@ namespace Glimpse.ElasticSearch
                 Method = method,
                 Index = GetSegment(uri, 1),
                 Document = GetSegment(uri, 2),
+                Endpoint = GetSegment(uri, 3),
                 Query = query
             };
 
