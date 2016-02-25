@@ -20,7 +20,6 @@
   </metadata>
   <files>
     <file src="bin\Release\Glimpse.ElasticSearch.dll" target="lib\net40" />
-    <file src="bin\Release\Glimpse.ElasticSearch.xml" target="lib\net40" />
     <file src="bin\Release\Glimpse.ElasticSearch.pdb" target="lib\net40" />
     <file src="*.cs" target="src" />
   </files>
