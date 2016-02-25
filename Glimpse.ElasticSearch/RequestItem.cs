@@ -10,5 +10,6 @@ namespace Glimpse.ElasticSearch
         public DateTime Time = DateTime.Now;
         public string Document { get; set; }
         public string Index { get; set; }
+        public string Endpoint { get; set; }
     }
 }

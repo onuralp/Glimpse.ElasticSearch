@@ -20,7 +20,7 @@ namespace Glimpse.ElasticSearch
             HttpWebRequest request = base.CreateHttpWebRequest(uri, method, data, requestSpecificConfig);
             TimeSpan timeSpan = DateTime.Now.Subtract(tsStart);
 
-            RequestHandler.Add(tsStart, timeSpan, request.Method, uri, Encoding.UTF8.GetString(data));
+            RequestHandler.Add(tsStart, timeSpan, request.Method, uri, Encoding.UTF8.GetString(data ?? new byte[0]));
 
             return request;
         }

@@ -19,7 +19,8 @@ namespace Glimpse.ElasticSearch
                 r.Cell(3).AlignRight();
                 r.Cell(4).AlignRight();
                 r.Cell(5).AlignRight();
-                r.Cell(6).WidthInPercent(60);
+                r.Cell(6).AlignRight();
+                r.Cell(7).WidthInPercent(60);
             }).Build();
 
         public override string Name
@@ -34,7 +35,7 @@ namespace Glimpse.ElasticSearch
 
         public override object GetData(ITabContext context)
         {
-            TabSection plugin = Plugin.Create("No", "Started", "Duration", "Method", "Index", "Document", "Query");
+            TabSection plugin = Plugin.Create("No", "Started", "Duration", "Method", "Index", "Document", "Endpoint", "Query");
 
             var requestContext = context.GetRequestContext<HttpContextBase>();
             List<RequestItem> items = RequestHandler.GetLogList(requestContext);
@@ -52,6 +53,7 @@ namespace Glimpse.ElasticSearch
                     .Column(item.Method)
                     .Column(item.Index)
                     .Column(item.Document)
+                    .Column(item.Endpoint)
                     .Column(item.Query);
             }
 
