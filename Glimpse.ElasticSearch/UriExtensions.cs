@@ -6,7 +6,7 @@ namespace Glimpse.ElasticSearch
     {
         public static string GetSegment(this Uri uri, int index)
         {
-            return uri.Segments.Length >= index ? uri.Segments[index].Trim('/') : null;
+            return uri.Segments.Length > index ? uri.Segments[index].Trim('/') : null;
         }
     }
 }
