@@ -31,9 +31,9 @@ namespace Glimpse.ElasticSearch
                 Time = time,
                 Duration = duration,
                 Method = method,
-                Index = uri.GetSegment(1),
-                Document = uri.GetSegment(2),
-                Endpoint = uri.GetSegment(3),
+                Index = uri.TryGetSegment(1),
+                Document = uri.TryGetSegment(2),
+                Endpoint = uri.TryGetSegment(3),
                 Query = query
             };
 

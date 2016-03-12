@@ -12,7 +12,7 @@ namespace Glimpse.Elasticsearch.Tests
         {
             var uri = new Uri("http://test-host:9200/index");
 
-            Assert.That(uri.GetSegment(2), Is.Null);
+            Assert.That(uri.TryGetSegment(2), Is.Null);
         }
 
         [Test]
@@ -20,7 +20,7 @@ namespace Glimpse.Elasticsearch.Tests
         {
             var uri = new Uri("http://test-host:9200/index");
 
-            Assert.That(uri.GetSegment(1), Is.EqualTo("index"));
+            Assert.That(uri.TryGetSegment(1), Is.EqualTo("index"));
         }
     }
 }
