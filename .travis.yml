@@ -2,25 +2,21 @@
 # see travis-ci.org for details
 
 language: csharp
-sudo: false
+solution: Glimpse.ElasticSearch.sln
 
 # Make sure build dependencies are installed.
 install:
- - travis_retry nuget install .nuget/packages.config -OutputDirectory packages
- - travis_retry nuget restore Glimpse.ElasticSearch.sln
- 
-cache: 
- - apt
- - directories:
-   - packages
+  - nuget restore Glimpse.ElasticSearch.sln
+  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
 
 # Run the build script
 script:
- - xbuild /p:Configuration=Release /verbosity:minimal Glimpse.ElasticSearch.sln
- - mono ./packages/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./Glimpse.Elasticsearch.Tests/bin/Release/Glimpse.Elasticsearch.Tests.dll
-
+  - xbuild /p:Configuration=Release Glimpse.ElasticSearch.sln
+  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./Glimpse.Elasticsearch.Tests/bin/Release/Glimpse.Elasticsearch.Tests.dll
+  
 # Only watch the master branch.
 branches:
  only:
    - master
    - dev
+ 
