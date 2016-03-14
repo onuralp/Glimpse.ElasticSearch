@@ -7,7 +7,7 @@ solution: Glimpse.ElasticSearch.sln
 # Make sure build dependencies are installed.
 install:
   - nuget restore Glimpse.ElasticSearch.sln
-  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+  - nuget install NUnit.Runners -OutputDirectory testrunner
 
 # Run the build script
 script:
