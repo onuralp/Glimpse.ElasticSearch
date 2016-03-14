@@ -7,12 +7,12 @@ solution: Glimpse.ElasticSearch.sln
 # Make sure build dependencies are installed.
 install:
   - nuget restore Glimpse.ElasticSearch.sln
-  - nuget install NUnit.Runners -OutputDirectory testrunner
+  - nuget install NUnit.Runners -Version 3.2.0 -OutputDirectory testrunner
 
 # Run the build script
 script:
   - xbuild /p:Configuration=Release Glimpse.ElasticSearch.sln
-  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./Glimpse.Elasticsearch.Tests/bin/Release/Glimpse.Elasticsearch.Tests.dll
+  - mono ./testrunner/NUnit.Runners.3.2.0/tools/nunit-console.exe ./Glimpse.Elasticsearch.Tests/bin/Release/Glimpse.Elasticsearch.Tests.dll
   
 # Only watch the master branch.
 branches:
