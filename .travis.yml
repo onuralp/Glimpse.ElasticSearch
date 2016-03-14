@@ -12,7 +12,7 @@ install:
 # Run the build script
 script:
   - xbuild /p:Configuration=Release Glimpse.ElasticSearch.sln
-  - mono ./testrunner/NUnit.Runners.3.2.0/tools/nunit-console.exe ./Glimpse.Elasticsearch.Tests/bin/Release/Glimpse.Elasticsearch.Tests.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.3.2.0/tools/nunit3-console.exe ./Glimpse.Elasticsearch.Tests/bin/Release/Glimpse.Elasticsearch.Tests.dll
   
 # Only watch the master branch.
 branches:
