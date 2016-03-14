@@ -31,9 +31,9 @@ namespace Glimpse.ElasticSearch
                 Time = time,
                 Duration = duration,
                 Method = method,
-                Index = GetSegment(uri, 1),
-                Document = GetSegment(uri, 2),
-                Endpoint = GetSegment(uri, 3),
+                Index = uri.TryGetSegment(1),
+                Document = uri.TryGetSegment(2),
+                Endpoint = uri.TryGetSegment(3),
                 Query = query
             };
 
@@ -46,11 +46,6 @@ namespace Glimpse.ElasticSearch
 
             var items = context.Items[Key] as List<RequestItem>;
             items.Add(requestItem);
-        }
-
-        private static string GetSegment(Uri uri, int index)
-        {
-            return uri.Segments.Length >= index ? uri.Segments[index].Trim('/') : null;
         }
     }
 }
