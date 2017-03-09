@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Text;
 using System.Web;
+using Elasticsearch.Net;
 
 namespace Glimpse.ElasticSearch
 {
-    internal static class RequestHandler
+    public static class RequestHandler
     {
         internal const string Key = "Glimpse.ElasticSearch";
 
@@ -12,29 +13,26 @@ namespace Glimpse.ElasticSearch
 
         internal static List<RequestItem> GetLogList(HttpContextBase context)
         {
-            if (context == null)
-                return null;
-
-            var items = context.Items[Key] as List<RequestItem>;
+            var items = context?.Items[Key] as List<RequestItem>;
 
             return items;
         }
 
-        public static void Add(DateTime time, TimeSpan duration, string method, Uri uri, string query)
+        public static void OnRequestCompletedHandler(IApiCallDetails apiCallDetails)
         {
-            HttpContext context = HttpContext.Current;
+            var context = HttpContext.Current;
             if (context == null)
                 return;
 
             var requestItem = new RequestItem
             {
-                Time = time,
-                Duration = duration,
-                Method = method,
-                Index = uri.TryGetSegment(1),
-                Document = uri.TryGetSegment(2),
-                Endpoint = uri.TryGetSegment(3),
-                Query = query
+                HttpMethod = apiCallDetails.HttpMethod.ToString(),
+                HttpStatus = apiCallDetails.HttpStatusCode.ToString(),
+                Index = apiCallDetails.Uri.TryGetSegment(1),
+                Document = apiCallDetails.Uri.TryGetSegment(2),
+                Endpoint = apiCallDetails.Uri.TryGetSegment(3),
+                Query = Encoding.UTF8.GetString(apiCallDetails.RequestBodyInBytes ?? new byte[0]),
+                ResponseData = Encoding.UTF8.GetString(apiCallDetails.ResponseBodyInBytes ?? new byte[0])
             };
 
             if (context.Items[Key] == null)

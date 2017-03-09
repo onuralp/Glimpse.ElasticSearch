@@ -1,15 +1,13 @@
-﻿using System;
-
-namespace Glimpse.ElasticSearch
+﻿namespace Glimpse.ElasticSearch
 {
     internal class RequestItem
     {
-        public TimeSpan? Duration;
-        public string Method;
+        public string HttpMethod;
         public string Query;
-        public DateTime Time = DateTime.Now;
+        public string ResponseData;
         public string Document { get; set; }
         public string Index { get; set; }
         public string Endpoint { get; set; }
+        public string HttpStatus { get; set; }
     }
 }

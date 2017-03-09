@@ -4,16 +4,17 @@ Glimpse.ElasticSearch
 Description
 -----------
 
-[![NuGet](https://img.shields.io/nuget/dt/Glimpse.ElasticSearch.svg)](https://www.nuget.org/packages/Glimpse.ElasticSearch)  [![Build status](https://ci.appveyor.com/api/projects/status/0kigtj1io5qaggmi?svg=true)](https://ci.appveyor.com/project/OnuralpTaner54458/glimpse-elasticsearch)  [![Build Status](https://travis-ci.org/onuralp/Glimpse.ElasticSearch.svg)](https://travis-ci.org/onuralp/Glimpse.ElasticSearch)
+[![NuGet](https://img.shields.io/nuget/v/Glimpse.ElasticSearch.svg)](https://www.nuget.org/packages/Glimpse.ElasticSearch)  [![Build status](https://ci.appveyor.com/api/projects/status/0kigtj1io5qaggmi?svg=true)](https://ci.appveyor.com/project/OnuralpTaner54458/glimpse-elasticsearch)  [![Build Status](https://travis-ci.org/onuralp/Glimpse.ElasticSearch.svg)](https://travis-ci.org/onuralp/Glimpse.ElasticSearch)
 
 A simple Glimpse plugin for ElasticSearch. It shows queries and response times.
 
 Usage
 -----
-You must create ElasticClient instance with GlimpseHttpConnection That's it.
+You must add RequestHandler.OnRequestCompletedHandler to the OnRequestCompleted event when creating the ConnectionSettings. That's it.
 
-    var settings = new ConnectionSettings(new Uri("http://localhost:9200"));
-    var client = new ElasticClient(settings, new GlimpseHttpConnection(settings));
+    var settings = new ConnectionSettings(connectionPool)
+                .OnRequestCompleted(RequestHandler.OnRequestCompletedHandler);
+    var client = new ElasticClient(settings);
 
 Screenshot
 ----------

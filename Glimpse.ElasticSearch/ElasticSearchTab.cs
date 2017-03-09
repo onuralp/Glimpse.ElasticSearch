@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web;
 using Glimpse.AspNet.Extensibility;
 using Glimpse.Core.Extensibility;
@@ -14,19 +12,17 @@ namespace Glimpse.ElasticSearch
             .Row(r =>
             {
                 r.Cell(0).AsKey();
-                r.Cell(1).AlignRight().Prefix("T+ ").Suffix(" ms");
-                r.Cell(2).AlignRight().Suffix(" ms");
+                r.Cell(1).AlignRight();
+                r.Cell(2).AlignRight();
                 r.Cell(3).AlignRight();
                 r.Cell(4).AlignRight();
                 r.Cell(5).AlignRight();
-                r.Cell(6).AlignRight();
-                r.Cell(7).WidthInPercent(60);
-            }).Build();
+                r.Cell(6).AlignRight().WidthInPercent(20);
+                r.Cell(7).AlignRight().WidthInPercent(20);
+            })
+            .Build();
 
-        public override string Name
-        {
-            get { return "ElasticSearch"; }
-        }
+        public override string Name => "ElasticSearch";
 
         public object GetLayout()
         {
@@ -35,27 +31,24 @@ namespace Glimpse.ElasticSearch
 
         public override object GetData(ITabContext context)
         {
-            TabSection plugin = Plugin.Create("No", "Started", "Duration", "Method", "Index", "Document", "Endpoint", "Query");
+            var plugin = Plugin.Create("No", "Status", "HttpMethod", "Index", "Document", "Endpoint", "Query",
+                "ResponseData");
 
             var requestContext = context.GetRequestContext<HttpContextBase>();
-            List<RequestItem> items = RequestHandler.GetLogList(requestContext);
-            if (items ==null|| !items.Any())
+            var items = RequestHandler.GetLogList(requestContext);
+            if (items == null || !items.Any())
                 return null;
-            int count = 0;
-            foreach (RequestItem item in items)
-            {
+            var count = 1;
+            foreach (var item in items)
                 plugin.AddRow()
                     .Column(count++)
-                    .Column(String.Format("{0:#,0}", item.Time.Subtract(requestContext.Timestamp).TotalMilliseconds))
-                    .Column(item.Duration.HasValue
-                        ? String.Format("{0:#,0}", item.Duration.Value.TotalMilliseconds)
-                        : null)
-                    .Column(item.Method)
+                    .Column(item.HttpStatus)
+                    .Column(item.HttpMethod)
                     .Column(item.Index)
                     .Column(item.Document)
                     .Column(item.Endpoint)
-                    .Column(item.Query);
-            }
+                    .Column(item.Query)
+                    .Column(item.ResponseData);
 
             return plugin;
         }
